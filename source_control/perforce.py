@@ -4,7 +4,8 @@
 Perforce support for Ansible
 """
 
-DOCUMENTATION = """
+DOCUMENTATION = """\
+---
 module: perforce
 author:
 - 'Mikhail Sobolev'
@@ -14,7 +15,7 @@ description:
 - why do we use list here?
 options:
   port:
-    reqiured: true
+    reqiured: false
     description:
     - description of the port
   client:
@@ -25,6 +26,11 @@ options:
     reqiured: true
     description:
     - some description of the 'dest'
+  revision:
+    reqiured: false
+    default: "#head"
+    description:
+    - some description of the 'revision'
   charset:
     reqiured: false
     description:
@@ -37,11 +43,56 @@ options:
     reqiured: false
     description:
     - some description of the 'trust'
-
-    P4CLIENTPATH     Directories client can access   Perforce Command Reference
-    P4IGNORE         Name of ignore file             Perforce Command Reference
-    P4PASSWD         User password passed to server  p4 help passwd
-    P4SSLDIR         SSL server credential directory Perforce Command Reference
-    P4USER           Perforce user name              p4 help usage
-
+  user:
+    reqiured: false
+    description:
+    - some description of the 'user'
+  passwd:
+    reqiured: false
+    description:
+    - some description of the 'passwd'
 """
+
+EXAMPLES = """\
+"""
+
+def main():
+    """
+    ...
+    """
+    module = AnsibleModule(
+        argument_spec=dict(
+            client=dict(
+                reqiured=True
+            ),
+            dest=dict(
+                reqiured=True
+            ),
+            revision=dict(
+                reqiured=False,
+                default='#head'
+            ),
+            charset=dict(
+                reqiured=False
+            ),
+            tickets=dict(
+                reqiured=False
+            ),
+            trust=dict(
+                reqiured=False
+            ),
+            user=dict(
+                reqiured=False
+            ),
+            passwd=dict(
+                reqiured=False
+            )
+        ),
+    )
+
+    module.exit_json(changed=True)
+
+from ansible.module_utils.basic import *
+
+if __name__ == '__main__':
+    main()
